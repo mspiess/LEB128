@@ -6,6 +6,11 @@ const { test } = Deno;
 const underTest = new SignedLeb128();
 const className = underTest.constructor.name;
 
+test(`${className} returns one byte for 0`, () => {
+  const actual = underTest.encode(0);
+  assertEquals(actual, [0]);
+});
+
 test(`${className} returns one byte for highest 6-bit number`, () => {
   const actual = underTest.encode(0b0011_1111);
   assertEquals(actual, [0b11_1111]);

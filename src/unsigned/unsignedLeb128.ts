@@ -13,6 +13,9 @@ export class UnsignedLeb128 {
     if (value > 0xFFFFFFFF) {
       throw new Error(`Value must not be larger than '2^32 - 1'!`);
     }
+    if (value === 0) {
+      return new Uint8Array([0]);
+    }
     const byteArray: number[] = [];
     while (value) {
       let byte = value & 0x7F;

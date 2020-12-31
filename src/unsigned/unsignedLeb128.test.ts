@@ -6,6 +6,11 @@ const { test } = Deno;
 const underTest = new UnsignedLeb128();
 const className = underTest.constructor.name;
 
+test(`${className} returns single byte for 0`, () => {
+  const actual = underTest.encode(0);
+  assertEquals(actual, [0]);
+});
+
 test(`${className} returns single byte for lowest 7-bit number`, () => {
   const actual = underTest.encode(0b0100_0000);
   assertEquals(actual, [0b0100_0000]);
